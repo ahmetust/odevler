@@ -1,0 +1,1 @@
+Konsoldan girilen 10 farklı sayıyı bir List yapısına aktaran daha sonra bu sayıların küçükten büyüğe ve büyükten küçüğe sıralanmış haallerini ekrana yazdıran bir dart programı
