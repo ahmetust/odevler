@@ -11,19 +11,18 @@ void main() {
 Toplama yapmak icin 1 giriniz
 Cikartma yapmak icin 2 giriniz
 carpma yapmak icin 3 giriniz
-bölme yapmak icin 4 giriniz 
-''';
+bölme yapmak icin 4 giriniz ''';
   print(selection);
   c = int.parse(stdin.readLineSync()!);
 
   if (c == 1) {
-    print('sonuc:  $a + $b = ${a + b}');
+    print('toplama sonucu:  $a + $b = ${a + b}');
   } else if (c == 2) {
-    print('sonuc:  $a - $b = ${a - b}');
+    print('cikartma sonucu:  $a - $b = ${a - b}');
   } else if (c == 3) {
-    print('sonuc:  $a x $b = ${a * b}');
+    print('carpma sonucu:  $a x $b = ${a * b}');
   } else if (c == 4) {
-    print('sonuc:  $a / $b = ${a / b}');
+    print('bolme sonucu:  $a / $b = ${a / b}');
   } else {
     print('lutfen gecerli bir islem giriniz');
   }
