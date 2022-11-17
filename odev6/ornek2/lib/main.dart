@@ -1,5 +1,5 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,7 +7,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,10 +23,9 @@ class MyApp extends StatelessWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
+  final _font = const TextStyle(fontSize: 18);
   final _suggestions = <WordPair>[];
-  final _saved = <WordPair>{};
-  final _biggerFont = const TextStyle(fontSize: 18);
-
+  final _liked = <WordPair>{};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +34,7 @@ class _RandomWordsState extends State<RandomWords> {
         actions: [
           IconButton(
             icon: const Icon(Icons.list),
-            onPressed: _pushSaved,
+            onPressed: _pushLiked,
             tooltip: 'Saved Suggestions',
           ),
         ],
@@ -50,13 +48,11 @@ class _RandomWordsState extends State<RandomWords> {
           if (index >= _suggestions.length) {
             _suggestions.addAll(generateWordPairs().take(10));
           }
-
-          final alreadySaved = _saved.contains(_suggestions[index]);
-
+          final alreadySaved = _liked.contains(_suggestions[index]);
           return ListTile(
             title: Text(
               _suggestions[index].asPascalCase,
-              style: _biggerFont,
+              style: _font,
             ),
             trailing: Icon(
               alreadySaved ? Icons.favorite : Icons.favorite_border,
@@ -66,9 +62,9 @@ class _RandomWordsState extends State<RandomWords> {
             onTap: () {
               setState(() {
                 if (alreadySaved) {
-                  _saved.remove(_suggestions[index]);
+                  _liked.remove(_suggestions[index]);
                 } else {
-                  _saved.add(_suggestions[index]);
+                  _liked.add(_suggestions[index]);
                 }
               });
             },
@@ -78,16 +74,16 @@ class _RandomWordsState extends State<RandomWords> {
     );
   }
 
-  void _pushSaved() {
+  void _pushLiked() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (context) {
-          final tiles = _saved.map(
+          final tiles = _liked.map(
             (pair) {
               return ListTile(
                 title: Text(
                   pair.asPascalCase,
-                  style: _biggerFont,
+                  style: _font,
                 ),
               );
             },
@@ -113,7 +109,6 @@ class _RandomWordsState extends State<RandomWords> {
 
 class RandomWords extends StatefulWidget {
   const RandomWords({super.key});
-
   @override
   State<RandomWords> createState() => _RandomWordsState();
 }
