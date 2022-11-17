@@ -7,14 +7,13 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
+      title: 'Startup Name generator',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Startup Name Generator'),
+          title: const Text('Startup Name generator'),
         ),
         body: const Center(
           child: RandomWords(),
@@ -25,24 +24,22 @@ class MyApp extends StatelessWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
+  final _font = const TextStyle(fontSize: 18);
   final _suggestions = <WordPair>[];
-  final _biggerFont = const TextStyle(fontSize: 18);
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
-      itemBuilder: /*1*/ (context, i) {
-        if (i.isOdd) return const Divider(); /*2*/
-
-        final index = i ~/ 2; /*3*/
+      itemBuilder: (context, i) {
+        if (i.isOdd) return const Divider();
+        final index = i ~/ 2;
         if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+          _suggestions.addAll(generateWordPairs().take(10));
         }
         return ListTile(
           title: Text(
             _suggestions[index].asPascalCase,
-            style: _biggerFont,
+            style: _font,
           ),
         );
       },
@@ -52,7 +49,6 @@ class _RandomWordsState extends State<RandomWords> {
 
 class RandomWords extends StatefulWidget {
   const RandomWords({super.key});
-
   @override
   State<RandomWords> createState() => _RandomWordsState();
 }
